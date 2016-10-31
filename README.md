@@ -19,9 +19,55 @@
 
 > 发送评论交换机
 
-| 选项           |     英文项     | 值                                   | 备注  |
-|---------------|----------------|-------------------------------------|---------|
-| 交换机名称     |      name       | [src/core] (src/core)               | 1.0     |
-| 模式          |     direct         | [src/cpp] (src/cpp)                 | 1.0     |
-| 持久化        |                 | [src/ruby] (src/ruby)               | 1.0     |
-| 自动删除       |                | [src/node] (src/node)               | 1.0     |
+| 选项           |     英文项     | 值                          |    备注  |
+|---------------|----------------|-----------------------------|---------|
+| 交换机名称     |      name      | send-comment               | string     |
+| 模式          |     mode        |      direct                 | enum     |
+| 持久化        |      durable    |           true              | boolean     |
+| 自动删除       |    autoDelete  |          false               | boolean     |
+
+> 接受评论(广播)交换机
+
+| 选项           |       英文项        | 值                                   | 备注  |
+|---------------|---------------------|-------------------------------------|---------|
+| 交换机名称     |      name           |     broadcast-comment               | string  |
+| 模式          |     mode            |              direct                 |  enum   |
+| 持久化        |      durable        |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           true                      |  boolean |
+
+#### 确定发送评论队列
+
+> 发送评论队列
+
+| 选项           |       英文项        | 值                                   | 备注  |
+|---------------|---------------------|-------------------------------------|---------|
+| 队列名称     |      name           |     comment.send               | string  |
+| 路由          |     rotingKey            |      comment.send                       |  string   |
+| 持久化        |      durable        |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           true                      |  boolean |
+
+#### 发送评论
+
+评论为普通JSON
+> 伪代码(Kotlin)
+```
+data class Comment(var content:String,var ct:Int,var did:String,var icon:String,var ip:String,var nick:String,var pg:Int,var rg:Int,var ts:Long,var uid:Int,var sts:Long = 0,var type:Int = 0,var room:String = "") {
+}
+```
+
+
+| 字段名         |        类型         | 备注                      | 必须  |
+|---------------|---------------------|---------------------------|-------|
+| content       |      string         |     弹幕内容               |  是   |
+| ct            |      int            |     时间轴                      |  string   |
+| did           |      string         |           true                      |  boolean |
+| icon          |      string         |           true                      |  boolean |
+| ip            |      string         |           true                      |  boolean |
+| nick          |      string         |           true                      |  boolean |
+| pg            |      int            |           true                      |  boolean |
+| rg            |      int            |           true                      |  boolean |
+| ts            |     long            |           true                      |  boolean |
+| uid           |     int             |           true                      |  boolean |
+| sts           |     long            |           true                      |  boolean |
+| type          |     int             |           true                      |  boolean |
+| room          |     string          |           true                      |  boolean |
