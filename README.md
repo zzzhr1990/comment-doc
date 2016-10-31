@@ -18,6 +18,7 @@
 #### 确定交换机
 
 > 发送评论交换机
+*
 
 | 选项           |     英文项     | 值                          |    备注  |
 |---------------|----------------|-----------------------------|---------|
@@ -26,14 +27,16 @@
 | 持久化        |      durable    |           true              | boolean     |
 | 自动删除       |    autoDelete  |          false               | boolean     |
 
-> 接受评论(广播)交换机
+> 接受评论(广播)交换机 
+
+*(无需配置和关心)
 
 | 选项           |       英文项        | 值                                   | 备注  |
 |---------------|---------------------|-------------------------------------|---------|
 | 交换机名称     |      name           |     broadcast-comment               | string  |
 | 模式          |     mode            |              direct                 |  enum   |
 | 持久化        |      durable        |           true                      |  boolean |
-| 自动删除       |     autoDelete     |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           false                      |  boolean |
 
 #### 确定发送评论队列
 
@@ -44,7 +47,7 @@
 | 队列名称     |      name           |     comment.send               | string  |
 | 路由          |     rotingKey            |      comment.send                       |  string   |
 | 持久化        |      durable        |           true                      |  boolean |
-| 自动删除       |     autoDelete     |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           false                      |  boolean |
 
 #### 发送评论
 
@@ -59,15 +62,19 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 | 字段名         |        类型         | 备注                      | 必须  |
 |---------------|---------------------|---------------------------|-------|
 | content       |      string         |     弹幕内容               |  是   |
-| ct            |      int            |     时间轴                      |  string   |
-| did           |      string         |           true                      |  boolean |
-| icon          |      string         |           true                      |  boolean |
-| ip            |      string         |           true                      |  boolean |
-| nick          |      string         |           true                      |  boolean |
-| pg            |      int            |           true                      |  boolean |
-| rg            |      int            |           true                      |  boolean |
-| ts            |     long            |           true                      |  boolean |
-| uid           |     int             |           true                      |  boolean |
-| sts           |     long            |           true                      |  boolean |
-| type          |     int             |           true                      |  boolean |
-| room          |     string          |           true                      |  boolean |
+| ct            |      int            |     平台类型               |  是   |
+| did           |      string         |     上条弹幕(.?)           |  是   |
+| icon          |      string         |     弹幕图片               |  是   |
+| ip            |      string         |     用户IP                 |  是   |
+| nick          |      string         |     用户昵称               |  是   |
+| pg            |      int            |     平台权限组              |  是   |
+| rg            |      int            |     房间权限组              |  是   |
+| ts            |     long            |     当前时间戳             |  是   |
+| uid           |     int             |     用户ID                 |  是   |
+| sts           |     long            |     当前播放时间轴          |  是   |
+| type          |     int             |     弹幕类型                |  是   |
+| room          |     string          |     房间号                  |  是   |
+
+### 服务器经过关键字过滤、弹幕入库等操作后，将向广播交换机广播弹幕，从服只需要在指定队列上取弹幕即可
+
+
