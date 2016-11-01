@@ -26,17 +26,6 @@
 | 持久化        |      durable    |           true              | boolean     |
 | 自动删除       |    autoDelete  |          false               | boolean     |
 
-> 接受评论(广播)交换机 
-
-* (无需配置和关心)
-
-| 选项           |       英文项        | 值                                   | 备注  |
-|---------------|---------------------|-------------------------------------|---------|
-| 交换机名称     |      name           |     broadcast-comment               | string  |
-| 模式          |     mode            |              direct                 |  enum   |
-| 持久化        |      durable        |           true                      |  boolean |
-| 自动删除       |     autoDelete     |           false                      |  boolean |
-
 #### 确定发送评论队列
 
 > 发送评论队列
@@ -44,7 +33,7 @@
 | 选项           |       英文项        | 值                                   | 备注  |
 |---------------|---------------------|-------------------------------------|---------|
 | 队列名称     |      name           |     comment.send               | string  |
-| 路由          |     rotingKey            |      comment.send                       |  string   |
+| 路由          |     rotingKey            |      comment.send             |  string   |
 | 持久化        |      durable        |           true                      |  boolean |
 | 自动删除       |     autoDelete     |           false                      |  boolean |
 
@@ -74,6 +63,36 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 | type          |     int             |     弹幕类型                |  是   |
 | room          |     string          |     房间号                  |  是   |
 
-### 服务器经过关键字过滤、弹幕入库等操作后，将向广播交换机广播弹幕，从服只需要在指定队列上取弹幕即可
 
+## 接收弹幕
+### 服务器经过关键字过滤、弹幕入库等操作后，将向广播交换机广播弹幕，从服只需要将任意队列绑定到交换机上获取弹幕即可
+#### 确定交换机
 
+> 接受评论(广播)交换机 
+
+| 选项           |       英文项        | 值                                   | 备注  |
+|---------------|---------------------|-------------------------------------|---------|
+| 交换机名称     |      name           |     broadcast-comment               | string  |
+| 模式          |     mode            |              fanout                 |  enum   |
+| 持久化        |      durable        |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           false                      |  boolean |
+
+#### 将队列绑定到交换机，因为是广播模式 因此队列路由key自行设置，建议使用UUID或者从服务器名字等不易重复的值
+
+> 发送评论队列(建议)
+
+| 选项           |       英文项        | 值                                   | 备注  |
+|---------------|---------------------|-------------------------------------|---------|
+| 队列名称     |      name           |     UUID.randomUUID.toString()        | string  |
+| 持久化        |      durable        |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           false                     |  boolean |
+
+接收弹幕伪代码(Kotlin)
+
+```java
+@RabbitListener(bindings = arrayOf(QueueBinding(Queue(), exchange = Exchange(Constants.BROADCAST_COMMENT_EXCHANGE,type = "fanout",durable = "true",autoDelete = "false"))))
+    fun receiveFooQueue(foo: Comment) {
+        log.info("Received {}",JacksonHelper.toJSON(foo))
+        //logger.info("Received Message <${foo.size}>")
+    }
+```
