@@ -89,10 +89,10 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 
 接收弹幕伪代码(Kotlin)
 
-```java
+```kotlin
 @RabbitListener(bindings = arrayOf(QueueBinding(Queue(), exchange = Exchange(Constants.BROADCAST_COMMENT_EXCHANGE,type = "fanout",durable = "true",autoDelete = "false"))))
-    fun receiveFooQueue(foo: Comment) {
-        log.info("Received {}",JacksonHelper.toJSON(foo))
-        //logger.info("Received Message <${foo.size}>")
-    }
+fun receiveFooQueue(foo: Comment) {
+    log.info("Received {}",JacksonHelper.toJSON(foo))
+    //logger.info("Received Message <${foo.size}>")
+}
 ```
