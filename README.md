@@ -84,7 +84,7 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 | 选项           |       英文项        | 值                                   | 备注  |
 |---------------|---------------------|-------------------------------------|---------|
 | 队列名称     |      name             |     UUID.randomUUID.toString()      | string  |
-| 持久化        |      durable        |           true                      |  boolean |
+| 持久化        |      durable        |           false                      |  boolean |
 | 自动删除       |     autoDelete     |           true                     |  boolean |
 
 接收弹幕伪代码(Kotlin)
