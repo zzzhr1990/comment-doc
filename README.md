@@ -41,7 +41,7 @@
 
 评论为普通JSON
 > 伪代码(Kotlin)
-```
+```kotlin
 data class Comment(var content:String,var ct:Int,var did:String,var icon:String,var ip:String,var nick:String,var pg:Int,var rg:Int,var ts:Long,var uid:Int,var sts:Long = 0,var type:Int = 0,var room:String = "") {
 }
 ```
@@ -83,9 +83,9 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 
 | 选项           |       英文项        | 值                                   | 备注  |
 |---------------|---------------------|-------------------------------------|---------|
-| 队列名称     |      name           |     UUID.randomUUID.toString()        | string  |
+| 队列名称     |      name             |     UUID.randomUUID.toString()      | string  |
 | 持久化        |      durable        |           true                      |  boolean |
-| 自动删除       |     autoDelete     |           false                     |  boolean |
+| 自动删除       |     autoDelete     |           true                     |  boolean |
 
 接收弹幕伪代码(Kotlin)
 
