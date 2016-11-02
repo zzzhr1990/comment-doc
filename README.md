@@ -51,7 +51,7 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 |---------------|---------------------|---------------------------|-------|
 | content       |      string         |     弹幕内容               |  是   |
 | ct            |      int            |     平台类型               |  是   |
-| did           |      string         |     上条弹幕(.?)           |  是   |
+| did           |      string         |     上条弹幕(.?)           |  否   |
 | icon          |      string         |     弹幕图片               |  是   |
 | ip            |      string         |     用户IP                 |  是   |
 | nick          |      string         |     用户昵称               |  是   |
@@ -96,3 +96,8 @@ fun receiveFooQueue(foo: Comment) {
     //logger.info("Received Message <${foo.size}>")
 }
 ```
+### 房间信息上报
+#### 将房间信息上报给核心服务器
+
+### 房间信息下发
+#### 将房间信息上报给核心服务器
