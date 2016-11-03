@@ -104,6 +104,6 @@ fun receiveFooQueue(foo: Comment) {
 
 ### 获取弹幕
 
-> http://123.59.101.208:1984/api/v1/comment/stream/${stream_name}
+> http://comment.qietv.douyucdn.cn/api/v1/comment/stream/${stream_name}
 
 目前弹幕不支持分页
