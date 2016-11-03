@@ -101,3 +101,9 @@ fun receiveFooQueue(foo: Comment) {
 
 ### 房间信息下发
 #### 将房间信息上报给核心服务器
+
+### 获取弹幕
+
+> http://123.59.101.208:1984/api/v1/comment/stream/${stream_name}
+
+目前弹幕不支持分页
