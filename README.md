@@ -79,12 +79,12 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 
 #### 将队列绑定到交换机，因为是广播模式 因此队列路由名称自行设置，建议使用UUID或者从服务器名字等不易重复的值
 
-> 发送评论队列(建议)
+> 接受评论(广播)(建议)队列
 
 | 选项           |       英文项        | 值                                   | 备注  |
 |---------------|---------------------|-------------------------------------|---------|
 | 队列名称     |      name             |     UUID.randomUUID.toString()      | string  |
-| 路由          |     rotingKey            |      -             |  string   |
+| 路由          |     rotingKey            |      无             |  string   |
 | 持久化        |      durable        |           false                      |  boolean |
 | 自动删除       |     autoDelete     |           true                     |  boolean |
 
@@ -100,8 +100,31 @@ fun receiveFooQueue(foo: Comment) {
 ### 房间信息上报
 #### 将房间信息上报给核心服务器
 
-### 房间信息下发
+#### 确定交换机
+
+> 继续沿用发送评论交换机
+
+| 选项           |     英文项     | 值                          |    备注  |
+|---------------|----------------|-----------------------------|---------|
+| 交换机名称     |      name      | send-comment               | string     |
+| 模式          |     mode        |      direct                 | enum     |
+| 持久化        |      durable    |           true              | boolean     |
+| 自动删除       |    autoDelete  |          false               | boolean     |
+
+#### 确定上报队列
+
+> 发送评论队列
+
+| 选项           |       英文项        | 值                                   | 备注  |
+|---------------|---------------------|-------------------------------------|---------|
+| 队列名称     |      name           |     UUID.toString()[建议]              | string  |
+| 路由          |     rotingKey            |      roominfo.publish             |  string   |
+| 持久化        |      durable        |           true                      |  boolean |
+| 自动删除       |     autoDelete     |           true                      |  boolean |
+
+### 房间信息/命令 下发
 #### 将房间信息上报给核心服务器
+> 此功能待定。预计将和弹幕信息接收合并。
 
 ### 获取弹幕
 
