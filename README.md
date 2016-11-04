@@ -77,13 +77,14 @@ data class Comment(var content:String,var ct:Int,var did:String,var icon:String,
 | 持久化        |      durable        |           true                      |  boolean |
 | 自动删除       |     autoDelete     |           false                      |  boolean |
 
-#### 将队列绑定到交换机，因为是广播模式 因此队列路由key自行设置，建议使用UUID或者从服务器名字等不易重复的值
+#### 将队列绑定到交换机，因为是广播模式 因此队列路由名称自行设置，建议使用UUID或者从服务器名字等不易重复的值
 
 > 发送评论队列(建议)
 
 | 选项           |       英文项        | 值                                   | 备注  |
 |---------------|---------------------|-------------------------------------|---------|
 | 队列名称     |      name             |     UUID.randomUUID.toString()      | string  |
+| 路由          |     rotingKey            |      -             |  string   |
 | 持久化        |      durable        |           false                      |  boolean |
 | 自动删除       |     autoDelete     |           true                     |  boolean |
 
