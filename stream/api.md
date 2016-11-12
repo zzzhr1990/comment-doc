@@ -29,9 +29,9 @@
 
 | 属性           |    类型        |  内容值                     |          备注            |
 |---------------|----------------|-----------------------------|-------------------------|
-| type          |     Integer     | 消息类型                   | 必须                     |
-| source         |     String     |      主服务器名             | 必须                     |
-| data        |      Object<T>    |     数据                    | Json Object             |
+| code          |     Integer     | 消息类型，类似于http cod    | 必须                     |
+| message       |     String     |      错误或者成功信息         | 必须                     |
+| data          |      Object<T>  |     数据                    | Json Object             |
 
 * 下面的为标准的应答消息体格式：
 ```json
@@ -132,3 +132,28 @@
 > 向流管理服务器上报开关播信息
 
 ### 开播
+
+* URL ```http://{HOST:PORT}/api/v1/live/start```
+
+* 参数 ```startTime``` ```categoryId``` ```categoryName``` ```userId``` ```userName``` ```title``` ```roomId``` ```ip```
+
+| 字段名         |        类型         | 备注                      | 必须  |
+|---------------|---------------------|---------------------------|-------|
+| startTime     |        long         | 开播当时服务器的UINX时间戳  |  是   |
+| categoryId    |        int          |     分类ID                |  是   |
+| categoryName  |       string        |     分类名                |  否   |
+| userId        |         int         |     用户ID                |  是   |
+| userName      |       string        |     用户名                 |  是   |
+| title         |       string        |     当时直播间名字          |  是   |
+| roomId        |       string        |     房间ID                 |  是   |
+| ip            |       string        |     用户ip                 |  是   |
+
+* 返回：
+
+```json
+{
+    "code":200,
+    "message":"SUCCESS",
+    "result":"OK"
+}
+```
