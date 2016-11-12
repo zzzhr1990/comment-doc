@@ -170,3 +170,43 @@
     "result":"OK"
 }
 ```
+
+### 关播
+
+* URL ```http://{HOST:PORT}/api/v1/live/end```
+
+* 参数 ```startTime``` ```categoryId``` ```categoryName``` ```userId``` ```userName``` ```title``` ```roomId``` ```ip```
+
+| 字段名         |        类型         | 备注                      | 必须  |
+|---------------|---------------------|---------------------------|-------|
+| startTime     |        long         | 关播当时服务器的UINX时间戳  |  是   |
+| categoryId    |        int          |     分类ID                |  是   |
+| categoryName  |       string        |     分类名                |  否   |
+| userId        |         int         |     用户ID                |  是   |
+| userName      |       string        |     用户名                 |  是   |
+| title         |       string        |     当时直播间名字          |  是   |
+| roomId        |       string        |     房间ID                 |  是   |
+| ip            |       string        |     用户ip                 |  是   |
+
+* 示例：
+```json
+{
+    "startTime":1477619931000,
+    "categoryId":100,
+    "categoryName":"体育女神",
+    "userId":1,
+    "userName":"赋闲公公",
+    "title":"测试视频",
+    "roomId":"10001928",
+    "ip":"27.17.49.21"
+}
+```
+* 返回：
+
+```json
+{
+    "code":200,
+    "message":"SUCCESS",
+    "result":"OK"
+}
+```
