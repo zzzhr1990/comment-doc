@@ -7,8 +7,12 @@
 
 * HOST: `interface.qietv.douyucdn.cn`
 * 端口: `80` 或 `443(SSL)`
+* 非特定约定使用 HTTP POST方式
+* 数据交换方式: JSON 
 
 ## 消息体格式
+
+* 
 
 ## 直播状态上报
 
