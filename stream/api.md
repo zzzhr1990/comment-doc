@@ -148,6 +148,19 @@
 | roomId        |       string        |     房间ID                 |  是   |
 | ip            |       string        |     用户ip                 |  是   |
 
+* 示例：
+```json
+{
+    "startTime":1477619878000,
+    "categoryId":100,
+    "categoryName":"体育女神",
+    "userId":1,
+    "userName":"赋闲公公",
+    "title":"测试视频",
+    "roomId":"10001928",
+    "ip":"27.17.49.21"
+}
+```
 * 返回：
 
 ```json
