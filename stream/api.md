@@ -1,4 +1,3 @@
-
 # 流管理系统API文档
 
 ## 一般规则
@@ -135,11 +134,11 @@
 
 * URL ```http://{HOST:PORT}/api/v1/live/start```
 
-* 参数 ```startTime``` ```categoryId``` ```categoryName``` ```userId``` ```userName``` ```title``` ```roomId``` ```ip```
+* 参数 ```time``` ```categoryId``` ```categoryName``` ```userId``` ```userName``` ```title``` ```autoVod``` ```autoCloseTimeout``` ```roomId``` ```ip```
 
 | 字段名         |        类型         | 备注                      | 必须  |
 |---------------|---------------------|---------------------------|-------|
-| startTime     |        long         | 开播当时服务器的UINX时间戳  |  是   |
+| time          |        long         | 开播当时服务器的UINX时间戳  |  是   |
 | categoryId    |        int          |     分类ID                |  是   |
 | categoryName  |       string        |     分类名                |  否   |
 | userId        |         int         |     用户ID                |  是   |
@@ -151,12 +150,14 @@
 * 示例：
 ```json
 {
-    "startTime":1477619878000,
+    "time":1477619931000,
     "categoryId":100,
     "categoryName":"体育女神",
     "userId":1,
     "userName":"赋闲公公",
     "title":"测试视频",
+    "autoVod":true,
+    "autoCloseTimeout":600000
     "roomId":"10001928",
     "ip":"27.17.49.21"
 }
@@ -175,28 +176,32 @@
 
 * URL ```http://{HOST:PORT}/api/v1/live/end```
 
-* 参数 ```startTime``` ```categoryId``` ```categoryName``` ```userId``` ```userName``` ```title``` ```roomId``` ```ip```
+* 参数 ```time``` ```categoryId``` ```categoryName``` ```userId``` ```userName``` ```title``` ```autoVod``` ```autoCloseTimeout``` ```roomId``` ```ip```
 
-| 字段名         |        类型         | 备注                      | 必须  |
-|---------------|---------------------|---------------------------|-------|
-| startTime     |        long         | 关播当时服务器的UINX时间戳  |  是   |
-| categoryId    |        int          |     分类ID                |  是   |
-| categoryName  |       string        |     分类名                |  否   |
-| userId        |         int         |     用户ID                |  是   |
-| userName      |       string        |     用户名                 |  是   |
-| title         |       string        |     当时直播间名字          |  是   |
-| roomId        |       string        |     房间ID                 |  是   |
-| ip            |       string        |     用户ip                 |  是   |
+| 字段名           |        类型         | 备注                                      | 必须  |
+|-----------------|---------------------|------------------------------------------|-------|
+| time            |        long         | 关播当时服务器的UINX时间戳                  |  是   |
+| categoryId      |        int          |     分类ID                                |  是   |
+| categoryName    |       string        |     分类名                                |  否   |
+| userId          |         int         |     用户ID                                |  是   |
+| userName        |       string        |     用户名                                |  否   |
+| title           |       string        |     当时直播间名字                         |  是   |
+| autoVod         |       boolean       |   是否自动转码并推送到点播                   |  是   |
+| autoCloseTimeout|       boolean       |   自动关播超时(单位为 ms 小于1 不自动关播)    |  是   |
+| roomId          |       string        |     房间ID                                |  是   |
+| ip              |       string        |     用户ip                                |  是   |
 
 * 示例：
 ```json
 {
-    "startTime":1477619931000,
+    "time":1477619931000,
     "categoryId":100,
     "categoryName":"体育女神",
     "userId":1,
     "userName":"赋闲公公",
     "title":"测试视频",
+    "autoVod":true,
+    "autoCloseTimeout":600000
     "roomId":"10001928",
     "ip":"27.17.49.21"
 }
@@ -210,3 +215,4 @@
     "result":"OK"
 }
 ```
+
