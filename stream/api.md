@@ -157,7 +157,7 @@
     "userName":"赋闲公公",
     "title":"测试视频",
     "autoVod":true,
-    "autoCloseTimeout":600000
+    "autoCloseTimeout":600000,
     "roomId":"10001928",
     "ip":"27.17.49.21"
 }
@@ -201,7 +201,7 @@
     "userName":"赋闲公公",
     "title":"测试视频",
     "autoVod":true,
-    "autoCloseTimeout":600000
+    "autoCloseTimeout":600000,
     "roomId":"10001928",
     "ip":"27.17.49.21"
 }
